@@ -1,5 +1,11 @@
 plan wordpress_example(TargetSpec $nodes) {
-  run_plan('facts', nodes => $nodes)
+  run_task('puppet_agent::install', $nodes)
+
+  $result = run_plan('facts', nodes => $nodes)
+  if !$result.ok {
+    return $result.error_set
+  }
+
   $report = apply($nodes) {
     class { 'apache':
       docroot => '/opt/wordpress'
@@ -15,13 +21,9 @@ plan wordpress_example(TargetSpec $nodes) {
     class { 'wordpress': }
   }
 
-  $report.each |$node| {
-    # Fail plan if any failed resources
-    $failed_resources = $node.value['resource_statuses'].filter |$key, $value| { $value['failed'] }
-    if !empty($failed_resources) {
-      fail($failed_resources)
+  return $report.map |$r| {
+    $r.value['logs'].map |$log| {
+      "${$log['source']}: ${$log['message']}"
     }
   }
-
-  $report.map |$r| { $r.value['logs'] }
 }

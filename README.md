@@ -3,7 +3,7 @@
 Install dependencies
 ```
 bundle install
-bundle exec r10k puppetfile install
+bundle exec bolt puppetfile install
 ```
 
 Run

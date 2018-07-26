@@ -22,8 +22,8 @@ plan wordpress_example(TargetSpec $nodes) {
   }
 
   return $report.map |$r| {
-    $r.value['logs'].map |$log| {
-      "${$log['source']}: ${$log['message']}"
+    ["Applying catalog on ${$r.target.name}"] + $r.value['logs'].map |$log| {
+      "[${$log['level'].capitalize}]: ${$log['source']}: ${$log['message']}"
     }
   }
 }

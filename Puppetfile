@@ -12,5 +12,5 @@ mod 'puppet-staging', '3.2.0'
 mod 'puppetlabs-translate', '1.1.0'
 
 mod 'puppetlabs-puppet_agent',
-  git:    'https://github.com/adreyer/puppetlabs-puppet_agent',
-  branch: 'BOLT-701'
+  git:    'https://github.com/puppetlabs/puppetlabs-puppet_agent',
+  branch: 'master'

@@ -1,5 +1,7 @@
 # Wordpress install with Bolt
 
+## Usage
+
 Install dependencies
 ```
 bundle install
@@ -16,4 +18,8 @@ Run
 ```
 bundle exec bolt plan run wordpress_example --boltdir . --nodes <nodes>
 ```
+
+## Future Plans
+
+Update to do a multi-target install similar to https://github.com/puppetlabs/puppetlabs-wordpress_app.
 

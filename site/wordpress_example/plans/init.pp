@@ -8,7 +8,8 @@ plan wordpress_example(TargetSpec $nodes) {
 
   $report = apply($nodes) {
     class { 'apache':
-      docroot => '/opt/wordpress'
+      docroot    => '/opt/wordpress',
+      mpm_module => 'prefork',
     }
     class { 'apache::mod::php': }
     class { 'mysql::server':
